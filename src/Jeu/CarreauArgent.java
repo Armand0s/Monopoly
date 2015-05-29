@@ -8,10 +8,12 @@ public class CarreauArgent extends CarreauAction {
         setMontant(montant);
     }
 
+        @Override
     public int getMontant() {
         return montant;
     }
 
+        @Override
     public void setMontant(int montant) {
         this.montant = montant;
     }  
