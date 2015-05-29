@@ -104,9 +104,38 @@ public class Monopoly {
         }
         
         
+        public void payer(Joueur payeur, Joueur receveur, int somme) {
+            payeur.paye(somme);
+            receveur.addCash(somme);
+            
+        }
         
         
         
+        
+        public Joueur checkCase() {
+            boolean res;
+            Carreau c = this.getCurrentPlayer().getPositionCourante();
+            
+            if (c instanceof ProprieteAConstruire) {
+                Joueur proprio = c.getProprietaire();
+                if (proprio != null && proprio != this.getCurrentPlayer()) {
+                    this.payer(this.getCurrentPlayer(), proprio,  ***************    ); // création de la fonction récupérer prix loyer
+                }
+            }
+            return null;
+        }
+        
+        public void checkPerdu(Joueur joueur) {
+            if (joueur.getCash() <= 0) {
+                this.removeJoueur(joueur);
+            }
+        }
+        
+        
+        public void removeJoueur(Joueur joueur) {
+            this.getJoueurs().remove(joueur);
+        }
         
         
         //////// Creation du plateau /////      
