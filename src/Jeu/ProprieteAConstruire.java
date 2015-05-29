@@ -24,7 +24,13 @@ public class ProprieteAConstruire extends CarreauPropriete {
             this.nbMaisons = nbMaisons;
         }
 
-        public ArrayList<Integer> getLoyerMaison() {
+           
+        @Override
+        public int getLoyerMaison() {
+            return loyerMaison.get(this.getNbMaisons()+ this.getNbHotel()*5);
+        }
+        
+        public ArrayList<Integer> getLoyerProp() {
             return loyerMaison;
         }
 
