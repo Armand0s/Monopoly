@@ -31,4 +31,19 @@ public abstract class Carreau {
         public void setMonopoly(Monopoly monopoly) {
             this.monopoly = monopoly;
         }
+        
+        public Joueur getProprietaire() {
+            return null;
+        }
+        
+        public void setProprietaire(Joueur _proprietaire) {
+        }
+        
+        public void setGroupePropriete(Groupe groupe) {
+            
+        }
+        
+        public Groupe getGroupePropriete() {
+            return null;
+        }
 }
