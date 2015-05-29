@@ -2,7 +2,7 @@ package Jeu;
 
 public abstract class CarreauPropriete extends Carreau {
 	private int prixAchat;
-        private int prixloyer;
+        private int loyerMaison;
         private Joueur proprietaire;
         
         public CarreauPropriete (int numero, String nomCarreau, Monopoly monopoly, int prixAchat){
@@ -28,13 +28,15 @@ public abstract class CarreauPropriete extends Carreau {
         }
 
 
-        public int getPrixloyer() {
-            return prixloyer;
+        @Override
+        public int getLoyerMaison() {
+            return loyerMaison;
         }
 
 
-        public void setPrixloyer(int prixloyer) {
-            this.prixloyer = prixloyer;
+        @Override
+        public void setLoyerMaison(int prixloyer) {
+            this.loyerMaison = prixloyer;
         }
         
 
