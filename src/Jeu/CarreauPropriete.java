@@ -2,7 +2,7 @@ package Jeu;
 
 public abstract class CarreauPropriete extends Carreau {
 	private int prixAchat;
-	private Joueur proprietaire;
+        private Groupe groupePropriete;
         
         public CarreauPropriete (int numero, String nomCarreau, Monopoly monopoly, int prixAchat){
             super(numero, nomCarreau, monopoly);
@@ -13,16 +13,27 @@ public abstract class CarreauPropriete extends Carreau {
             return prixAchat;
         }
 
-        public void setPrixAchat(int _prixAchat) {
-            this.prixAchat = _prixAchat;
+        public void setPrixAchat(int prixAchat) {
+            this.prixAchat = prixAchat;
         }
 
+        @Override
         public Joueur getProprietaire() {
-            return proprietaire;
+            return null;
         }
-
-        public void setProprietaire(Joueur _proprietaire) {
-            this.proprietaire = _proprietaire;
+        @Override
+        public void setProprietaire(Joueur proprietaire) {
+            
+        }
+        
+        @Override
+        public void setGroupePropriete(Groupe groupe) {
+            this.groupePropriete = groupe;
+        }
+        
+        @Override
+        public Groupe getGroupePropriete() {
+            return this.groupePropriete;
         }
         
 }
