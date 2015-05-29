@@ -20,6 +20,8 @@ public class Monopoly {
 
 
         public Monopoly(String dataFilename){
+            
+                carreaux = new HashMap<>();    
                 initGroupe();
 		buildGamePlateau(dataFilename);
 	}
@@ -137,7 +139,7 @@ public class Monopoly {
                                         loyer.add(mais4);
                                         loyer.add(hotel);
                                         
-                                        ProprieteAConstruire c = new ProprieteAConstruire(num,nomC,this,prix,loyer,grp);
+                                        ProprieteAConstruire c = new ProprieteAConstruire(num,nomC,this,prix,loyer,grp);                                    
                                         carreaux.put(num,c);
 				}
 				else if(caseType.compareTo("G") == 0){
