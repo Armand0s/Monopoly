@@ -50,5 +50,14 @@ public abstract class Carreau {
         }
         
         
+        public int getLoyerMaison() {
+            return 0;
+        }
+
+
+        public void setLoyerMaison(int prixloyer) {
+            
+        }
+        
         
 }
