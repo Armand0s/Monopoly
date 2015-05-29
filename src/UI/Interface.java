@@ -67,7 +67,7 @@ public class Interface {
         System.out.println("---Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +"---");
         System.out.println("--------------------------");
         
-        
+           
     }
     
     
