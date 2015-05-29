@@ -113,17 +113,63 @@ public class Monopoly {
         
         
         
-        public Joueur checkCase() {
-            boolean res;
-            Carreau c = this.getCurrentPlayer().getPositionCourante();
+        public int getMontantAPayer(Joueur joueur, Carreau carreau) {
+            int res=0;
+            
+            // Posibilité : Le terrain est une gare
+            
+            if (carreau instanceof Gare) {
+                res = 25 * carreau.getProprietaire().getNbGare();
+            } else if (carreau instanceof Compagnie) {
+                // Ne prend pas en compte si vient de carte chance
+                if (carreau.getProprietaire().getNbCompanies() == 1) {
+                    res = 4* joueur.getDernierjetdes();
+                } else {
+                    res = 10* joueur.getDernierjetdes();
+                }
+            } else {
+                res = carreau.getLoyerMaison();
+            }
+            return res;
+        }
+        
+
+        
+        public boolean proprioGroupe(Joueur joueur, ProprieteAConstruire carreau) {
+            
+            Groupe groupe;
+            groupe = carreau.getGroupePropriete();
+            
+            boolean res = true;
+            
+            if (groupe != null) {
+                for (ProprieteAConstruire prop : groupe.getProprietes()) {
+                    if (prop.getProprietaire() != joueur) {
+                        res = false;
+                    }
+                }
+            }
+            return res;
+        }
+        
+        
+        
+        
+        
+        
+        public void checkCarreau(Joueur joueur_jouant) { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
+           
+            Carreau c = joueur_jouant.getPositionCourante();
             
             if (c instanceof ProprieteAConstruire) {
                 Joueur proprio = c.getProprietaire();
                 if (proprio != null && proprio != this.getCurrentPlayer()) {
-                    this.payer(this.getCurrentPlayer(), proprio,  ***************    ); // création de la fonction récupérer prix loyer
+                    this.payer(joueur_jouant, proprio, this.getMontantAPayer(joueur_jouant, c));
                 }
+            } else { // (c instanceof CarreauAction)
+                // Faire la fonction pour déplcer ou payer suivant la carte mais réservé à la semaien bloquée je crois
             }
-            return null;
+           
         }
         
         public void checkPerdu(Joueur joueur) {
