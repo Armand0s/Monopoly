@@ -6,10 +6,11 @@ public class Joueur {
 	private String nomJoueur;
 	private int cash = 1500;
 	private Monopoly monopoly;
+        private Carreau positionCourante;
 	private ArrayList<Compagnie> compagnies = new ArrayList<Compagnie>();
 	private ArrayList<Gare> gares = new ArrayList<Gare>();
-	private Carreau positionCourante;
 	private ArrayList<ProprieteAConstruire> proprietesAConstruire = new ArrayList<ProprieteAConstruire>();
+        private boolean vientCarteChance;
         
         private boolean doubleDe;
         private int nbDouble;
@@ -100,6 +101,7 @@ public class Joueur {
             return positionCourante;
         }
         public void setPositionCourante(Carreau positionCourante) {
+            //if (this.getPositionCourante() ==  // Cheacker si il vient d'une carte chance ou pas
             this.positionCourante = positionCourante;
         }
 
@@ -115,21 +117,14 @@ public class Joueur {
             
         }    
         
-        public boolean proprioGroupe(Carreau carreau) {
-            
-            Groupe groupe;
-            groupe = carreau.getGroupePropriete();
-            
-            boolean res = true;
-            
-            if (groupe != null) {
-                for (ProprieteAConstruire prop : groupe.getProprietes()) {
-                    if (prop.getProprietaire() != this) {
-                        res = false;
-                    }
-                }
-                
-            }
-            return res;
+        
+        public int getNbGare() {
+            return this.gares.size();
         }
+        
+        public int getNbCompanies() {
+            return this.compagnies.size();
+        }
+        
+        
 }
