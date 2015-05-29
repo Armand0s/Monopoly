@@ -6,4 +6,14 @@ public abstract class CarreauAction extends Carreau {
         super(numero, nomCarreau, monopoly);
     }
     
+    @Override
+    public void setMontant(int montant) {
+            
+        }
+        
+    @Override
+        public int getMontant() {
+            return 0;
+        }
+    
 }
