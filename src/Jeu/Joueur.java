@@ -109,6 +109,27 @@ public class Joueur {
         public void setProprietesAConstruire(ArrayList<ProprieteAConstruire> proprietesAConstruire) {
             this.proprietesAConstruire = proprietesAConstruire;
         }
+       
+        public void paye(int somme) {
+            this.setCash(this.getCash()- somme);
+            
+        }    
         
-        
+        public boolean proprioGroupe(Carreau carreau) {
+            
+            Groupe groupe;
+            groupe = carreau.getGroupePropriete();
+            
+            boolean res = true;
+            
+            if (groupe != null) {
+                for (ProprieteAConstruire prop : groupe.getProprietes()) {
+                    if (prop.getProprietaire() != this) {
+                        res = false;
+                    }
+                }
+                
+            }
+            return res;
+        }
 }
