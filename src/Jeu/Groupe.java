@@ -48,8 +48,8 @@ public class Groupe {
         
     public boolean groupePossede(Joueur joueur){
         Boolean res = true;
-        for (int i=0 ; i<proprietes.size(); i++){
-            if (joueur != proprietes.get(i).getProprietaire()){
+        for (ProprieteAConstruire prop : proprietes){
+            if (joueur != prop.getProprietaire()){
                 res = false;
             }
         }

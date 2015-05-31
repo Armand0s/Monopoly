@@ -111,23 +111,6 @@ public class Monopoly {
         }
         
         
-        public boolean proprioGroupe(Joueur joueur, ProprieteAConstruire carreau) {
-            
-            Groupe groupe;
-            groupe = carreau.getGroupePropriete();
-            
-            boolean res = true;
-            
-            for (ProprieteAConstruire prop : groupe.getProprietes()) {
-                if (prop.getProprietaire() != joueur) {
-                    res = false;
-                }
-            }
-            
-            return res;
-        }
-
-        
         public void checkCarreau(Joueur joueur_jouant) { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
            
             Carreau c = joueur_jouant.getPositionCourante();
