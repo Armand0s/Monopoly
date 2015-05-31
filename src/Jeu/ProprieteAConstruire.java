@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class ProprieteAConstruire extends CarreauPropriete {
 	private int nbMaisons = 0;
 	private int nbHotel = 0;
-        private ArrayList<Integer> loyerMaison;
+        private ArrayList<Integer> loyers;
 	private Groupe groupePropriete;
         
-        public ProprieteAConstruire(int numero, String nomCarreau, Monopoly monopoly, int prixAchat, ArrayList<Integer> loyerMaison, Groupe groupePropriete){
+        public ProprieteAConstruire(int numero, String nomCarreau, Monopoly monopoly, int prixAchat, ArrayList<Integer> loyers, Groupe groupePropriete){
             super(numero, nomCarreau, monopoly, prixAchat);
-            setLoyerMaison(loyerMaison);
+            setLoyers(loyers);
             setGroupePropriete(groupePropriete);
         }
 
@@ -23,17 +23,26 @@ public class ProprieteAConstruire extends CarreauPropriete {
             this.nbMaisons = nbMaisons;
         }
 
-           
-        public int getLoyerMaison() {
-            return loyerMaison.get(this.getNbMaisons()+ this.getNbHotel()*5);
+        @Override   
+        public int getMontantAPayer() {
+            Joueur prop = getProprietaire();
+            if (groupePropriete.groupePossede(prop))
+                if (nbHotel == 1)
+                    return loyers.get(5);
+                else if (nbMaisons != 0)
+                    return loyers.get(nbMaisons);
+                else
+                    return loyers.get(0)*2;
+            else
+                return loyers.get(0);
         }
         
-        public ArrayList<Integer> getLoyerProp() {
-            return loyerMaison;
+        public ArrayList<Integer> getLoyers() {
+            return loyers;
         }
 
-        public void setLoyerMaison(ArrayList<Integer> loyerMaison) {
-            this.loyerMaison = loyerMaison;
+        public void setLoyers(ArrayList<Integer> loyerMaison) {
+            this.loyers = loyerMaison;
         }
 
         public int getNbHotel() {
@@ -51,10 +60,7 @@ public class ProprieteAConstruire extends CarreauPropriete {
         public void setGroupePropriete(Groupe groupePropriete) {
             this.groupePropriete = groupePropriete;
         }
-        
-        public int getMontantAPayer(){
-            return 0;
-        }
+       
         
         
 }

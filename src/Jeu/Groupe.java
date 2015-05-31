@@ -46,5 +46,14 @@ public class Groupe {
         this.proprietes = proprietes;
     }
         
+    public boolean groupePossede(Joueur joueur){
+        Boolean res = true;
+        for (int i=0 ; i<proprietes.size(); i++){
+            if (joueur != proprietes.get(i).getProprietaire()){
+                res = false;
+            }
+        }
+        return res;
+    }
         
 }
