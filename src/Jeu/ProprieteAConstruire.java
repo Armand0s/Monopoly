@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 public class ProprieteAConstruire extends CarreauPropriete {
 	private int nbMaisons = 0;
-	private ArrayList<Integer> loyerMaison;
 	private int nbHotel = 0;
+        private ArrayList<Integer> loyerMaison;
 	private Groupe groupePropriete;
-        private Joueur proprietaire;
         
         public ProprieteAConstruire(int numero, String nomCarreau, Monopoly monopoly, int prixAchat, ArrayList<Integer> loyerMaison, Groupe groupePropriete){
             super(numero, nomCarreau, monopoly, prixAchat);
@@ -25,7 +24,6 @@ public class ProprieteAConstruire extends CarreauPropriete {
         }
 
            
-        @Override
         public int getLoyerMaison() {
             return loyerMaison.get(this.getNbMaisons()+ this.getNbHotel()*5);
         }
@@ -52,16 +50,6 @@ public class ProprieteAConstruire extends CarreauPropriete {
 
         public void setGroupePropriete(Groupe groupePropriete) {
             this.groupePropriete = groupePropriete;
-        }
-
-        @Override
-        public void setProprietaire(Joueur _proprietaire) {
-            this.proprietaire = _proprietaire; //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public Joueur getProprietaire() {
-            return this.proprietaire; //To change body of generated methods, choose Tools | Templates.
         }
         
         

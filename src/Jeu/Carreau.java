@@ -33,31 +33,4 @@ public abstract class Carreau {
         }
         
         
-        public Joueur getProprietaire() {
-            return null;
-        }
-        
-        public void setProprietaire(Joueur proprietaire) {
-            
-        }
-
-        public void setMontant(int montant) {
-            
-        }
-        
-        public int getMontant() {
-            return 0;
-        }
-        
-        
-        public int getLoyerMaison() {
-            return 0;
-        }
-
-
-        public void setLoyerMaison(int prixloyer) {
-            
-        }
-        
-        
 }
