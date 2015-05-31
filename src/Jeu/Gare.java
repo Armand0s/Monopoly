@@ -10,16 +10,10 @@ public class Gare extends CarreauPropriete {
     }
 
     @Override
-    public void setProprietaire(Joueur _proprietaire) {
-        this.proprietaire = _proprietaire; 
+    public int getMontantAPayer() {
+        int nbGare = getProprietaire().getNbGare();
+        return 25 * nbGare;
     }
 
-    @Override
-    public Joueur getProprietaire() {
-        return this.proprietaire; 
-    }
-    
-    
-    
     
 }
