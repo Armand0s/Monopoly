@@ -113,7 +113,7 @@ public class Monopoly {
         
         
         
-        public int getMontantAPayer(Joueur joueur, Carreau carreau) {
+        public int getMontantAPayer(Joueur joueur, CarreauPropriete carreau) {
             int res=0;
             
             // Posibilité : Le terrain est une gare
@@ -142,13 +142,12 @@ public class Monopoly {
             
             boolean res = true;
             
-            if (groupe != null) {
-                for (ProprieteAConstruire prop : groupe.getProprietes()) {
-                    if (prop.getProprietaire() != joueur) {
-                        res = false;
-                    }
+            for (ProprieteAConstruire prop : groupe.getProprietes()) {
+                if (prop.getProprietaire() != joueur) {
+                    res = false;
                 }
             }
+            
             return res;
         }
         
