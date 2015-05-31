@@ -28,9 +28,9 @@ public class Monopoly {
         
     public int lancerDe() {
         Random jet = new Random();
-        int valde = jet.nextInt(5)+1;
+        int valDe = jet.nextInt(5)+1;
         
-        return valde;
+        return valDe;
     }
     
     public int lancerDes(){
@@ -111,30 +111,6 @@ public class Monopoly {
         }
         
         
-        
-        
-        public int getMontantAPayer(Joueur joueur, CarreauPropriete carreau) {
-            int res=0;
-            
-            // Posibilité : Le terrain est une gare
-            
-            if (carreau instanceof Gare) {
-                res = 25 * carreau.getProprietaire().getNbGare();
-            } else if (carreau instanceof Compagnie) {
-                // Ne prend pas en compte si vient de carte chance
-                if (carreau.getProprietaire().getNbCompanies() == 1) {
-                    res = 4* joueur.getDernierjetdes();
-                } else {
-                    res = 10* joueur.getDernierjetdes();
-                }
-            } else {
-                res = carreau.getLoyerMaison();
-            }
-            return res;
-        }
-        
-
-        
         public boolean proprioGroupe(Joueur joueur, ProprieteAConstruire carreau) {
             
             Groupe groupe;
@@ -150,11 +126,7 @@ public class Monopoly {
             
             return res;
         }
-        
-        
-        
-        
-        
+
         
         public void checkCarreau(Joueur joueur_jouant) { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
            
@@ -163,7 +135,7 @@ public class Monopoly {
             if (c instanceof ProprieteAConstruire) {
                 Joueur proprio = c.getProprietaire();
                 if (proprio != null && proprio != this.getCurrentPlayer()) {
-                    this.payer(joueur_jouant, proprio, this.getMontantAPayer(joueur_jouant, c));
+                    //this.payer(joueur_jouant, proprio, this.getMontantAPayer(joueur_jouant, c));
                 }
             } else { // (c instanceof CarreauAction)
                 // Faire la fonction pour déplcer ou payer suivant la carte mais réservé à la semaien bloquée je crois

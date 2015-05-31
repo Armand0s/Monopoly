@@ -11,7 +11,7 @@ public class Joueur {
 	private ArrayList<Gare> gares = new ArrayList<Gare>();
 	private ArrayList<ProprieteAConstruire> proprietesAConstruire = new ArrayList<ProprieteAConstruire>();
         private boolean vientCarteChance;
-        private int dernierjetdes;
+        private int dernierJetDes;
         
         private boolean doubleDe;
         private int nbDouble;
@@ -24,7 +24,7 @@ public class Joueur {
         
         
         public void avancer(int nbcase) {
-            this.dernierjetdes = nbcase;
+            this.dernierJetDes = nbcase;
             if (getPositionCourante().getNumero()+nbcase > 40) {
                 this.setPositionCourante(monopoly.getCarreau(getPositionCourante().getNumero() + nbcase - 40));
                 this.addCash(200);
@@ -136,12 +136,12 @@ public class Joueur {
             this.vientCarteChance = vientCarteChance;
         }
 
-        public int getDernierjetdes() {
-            return dernierjetdes;
+        public int getDernierJetDes() {
+            return dernierJetDes;
         }
 
-        public void setDernierjetdes(int dernierjetdes) {
-            this.dernierjetdes = dernierjetdes;
+        public void setDernierJetDes(int dernierjetdes) {
+            this.dernierJetDes = dernierjetdes;
         }
         
         
