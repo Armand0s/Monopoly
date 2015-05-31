@@ -25,7 +25,7 @@ public abstract class CarreauPropriete extends Carreau {
             this.proprietaire = proprietaire;
         }
 
-
+        abstract public int getMontantAPayer();
         
 
         

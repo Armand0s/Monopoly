@@ -52,6 +52,9 @@ public class ProprieteAConstruire extends CarreauPropriete {
             this.groupePropriete = groupePropriete;
         }
         
+        public int getMontantAPayer(){
+            return 0;
+        }
         
         
 }
