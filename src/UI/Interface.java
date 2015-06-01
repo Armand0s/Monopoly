@@ -61,11 +61,40 @@ public class Interface {
     }
     
     public void jouer() {
-        
+        // On rappelle où en est le joueur
         System.out.println("--------------------------");
         System.out.println("------ Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
         System.out.println("------ Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +"---");
         System.out.println("--------------------------");
+        
+        // On lance les des et on avance
+        System.out.println("Appuyez sur ENTRER pour lancer les dés");
+        System.out.println(monopoly.lancerDes());
+        
+        System.out.println("Vous avez");
+        
+        
+        
+        
+        
+        // On effectue l'action sur la case
+        
+        
+        
+        
+        // SI IL PEUT : On propose d'acheter un titre de propriété
+        
+        // SI IL PEUT : On propose de construire
+        
+        // SI IL PEUT : On propose de passer au tour suivant
+        
+        // SI IL PEUT : On propose de quitter la partie
+        
+        
+        // On affiche ensuite l'état courant du jeu et la patrimoine de chaque joueur
+        
+        
+        // On incremente de 1 le numéro du joueur
         
         
         monopoly.setCurrentPlayer( // Incrémente le CurrentJoueur
