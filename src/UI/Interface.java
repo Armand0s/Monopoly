@@ -63,11 +63,21 @@ public class Interface {
     public void jouer() {
         
         System.out.println("--------------------------");
-        System.out.println("------Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
-        System.out.println("---Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +"---");
+        System.out.println("------ Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
+        System.out.println("------ Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +"---");
         System.out.println("--------------------------");
         
-           
+        
+        monopoly.setCurrentPlayer( // Incrémente le CurrentJoueur
+                monopoly.getJoueurs().get(
+                    monopoly.getJoueurs().indexOf( // int
+                        monopoly.getJoueurs().indexOf(
+                            monopoly.getCurrentPlayer(
+                            )
+                        )
+                    +1)
+                )
+        );
     }
     
     
