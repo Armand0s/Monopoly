@@ -35,13 +35,13 @@ public class Monopoly {
         return valDe;
     }
     
-    public int lancerDes(){
-        int sommeDes;
-        int valTemp;
-        sommeDes = lancerDe();
-        valTemp = lancerDe();
-        getCurrentPlayer().actionDouble(sommeDes == valTemp);
-        return (sommeDes += valTemp);
+    public String lancerDes(){
+        int de1;
+        int de2;
+        de1 = lancerDe();
+        de2 = lancerDe();
+        getCurrentPlayer().actionDouble(de1 == de2);
+        return "Vous lancez les dés qui tombent sur le chiffre " + de1 + " et " + de2 + ".";
     }
         
     public Joueur getCurrentPlayer() {
