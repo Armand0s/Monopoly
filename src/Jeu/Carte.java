@@ -27,5 +27,4 @@ public abstract class Carte {
             }
             joueur.avancer(i);
         }
-    }
 }
