@@ -5,10 +5,22 @@
  */
 package Jeu;
 
-/**
- *
- * @author Bat
- */
-public class CarteCaisseEnum {
-    
+
+public enum CarteCaisseEnum {
+    libere_prison,
+    payez_amende,
+    payez_note_medecin,
+    payez_hopital,
+    payez_assurance,
+    recevez_anniversaire,
+    recevez_erreur_banque,
+    recevez_contributions,
+    recevez_heritage,
+    recevez_vente_stock,
+    recevez_interet_emprunt,
+    recevez_revenu_annuel,
+    recevez_prix_beaute,
+    allez_prison,
+    reculez_belleville,
+    avancez_depart,
 }

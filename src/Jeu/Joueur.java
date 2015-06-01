@@ -152,6 +152,20 @@ public class Joueur {
             this.dernierJetDes = dernierjetdes;
         }
         
+        public int getNbMaisons(){
+            int i = 0;
+            for (ProprieteAConstruire prop : proprietesAConstruire){
+                i += prop.getNbMaisons();
+            }
+            return i;
+        }
+        public int getNbHotels(){
+            int i = 0;
+            for (ProprieteAConstruire prop : proprietesAConstruire){
+                i += prop.getNbHotel();
+            }
+            return i;
+        }
         
         
         
