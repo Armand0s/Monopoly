@@ -71,11 +71,14 @@ public class Joueur {
         public int getCash() {
             return cash;
         }
-        public void setCash(int cash) {
+        private void setCash(int cash) {
             this.cash = cash;
         }
         public void addCash(int cash){
-            this.cash += cash;
+            this.setCash(this.getCash() + cash);
+        }
+        public void removeCash(int cash){
+            this.setCash(this.getCash() - cash);
         }
 
         public Monopoly getMonopoly() {
@@ -113,12 +116,17 @@ public class Joueur {
         public void setProprietesAConstruire(ArrayList<ProprieteAConstruire> proprietesAConstruire) {
             this.proprietesAConstruire = proprietesAConstruire;
         }
-       
-        public void paye(int somme) {
-            this.setCash(this.getCash()- somme);
-            
-        }    
         
+        public void payer(Joueur joueur, int montant){
+            if (this.getCash() >= montant){
+                this.removeCash(montant);
+                joueur.addCash(montant);
+            } else {
+                int argentJoueur = this.getCash();
+                this.removeCash(argentJoueur);
+                joueur.addCash(argentJoueur);
+            }
+        }
         
         public int getNbGare() {
             return this.gares.size();
@@ -142,6 +150,28 @@ public class Joueur {
 
         public void setDernierJetDes(int dernierjetdes) {
             this.dernierJetDes = dernierjetdes;
+        }
+        
+        
+        
+        
+        public String actionCarreau() { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
+           
+            Carreau cTemp = this.getPositionCourante();
+            
+            if (cTemp instanceof ProprieteAConstruire) {
+                ProprieteAConstruire c = (ProprieteAConstruire) cTemp;
+                Joueur proprio = c.getProprietaire();
+                if (proprio != null && proprio != this) {
+                    int montantAPayer = c.getMontantAPayer();
+                    this.payer(proprio, montantAPayer);
+                } else if (proprio == null) {
+                    //getMonopoly().getInter().proposerAchat();
+                }
+            } else { // (c instanceof CarreauAction)
+                // Faire la fonction pour déplacer ou payer suivant la carte mais réservé à la semaien bloquée je crois
+            }
+           return "blbl";
         }
         
         
