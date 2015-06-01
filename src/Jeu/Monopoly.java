@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Monopoly {
@@ -17,7 +18,8 @@ public class Monopoly {
         private ArrayList<Groupe> groupes = new ArrayList();
         private HashMap<Integer, Carreau> carreaux;
         private int numJoueur;
-
+        private LinkedList<CarteChance> carteChances = new LinkedList<>();
+        private LinkedList<CarteCaisse> carteCaisses = new LinkedList<>();
 
         public Monopoly(String dataFilename){
             
@@ -250,7 +252,17 @@ public class Monopoly {
             }
             return null;
         }
-	
+        
+ /*       private void initCarte(){
+            for (CarteCaisseEnum carteCaisse : CarteCaisseEnum.values()){
+                carteCaisses.add(new CarteCaisse());
+            }
+            
+            for (CarteChanceEnum carteChance : CarteChanceEnum.values()){
+                carteChances.add(new CarteChances());
+            }
+        }
+*/	
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
 	{
 		ArrayList<String[]> data = new ArrayList<String[]>();
