@@ -11,6 +11,11 @@ public class Main {
                 
                 inter.initialiserPartie();
                 
-                inter.jouer();
+                while (m.getJoueurs().size() !=1) {
+                    inter.jouer();
+                }
+                
+                System.out.println("Bravo ! Parfit finit !");
+                System.out.println("Joueur " + m.getJoueurs().get(0).getNomJoueur() + " a gagné !");
 	}
 }
