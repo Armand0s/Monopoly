@@ -41,7 +41,7 @@ public class Monopoly {
         de1 = lancerDe();
         de2 = lancerDe();
         getCurrentPlayer().actionDouble(de1 == de2);
-        inter.afficherLancerDes(de1,de2);
+        inter.afficherLancerDe(de1,de2);
         return de1 + de2;
         
     }
@@ -59,6 +59,9 @@ public class Monopoly {
             joueur.allerPrison();
         }
     }
+    
+    
+    
     
     public void sortirPrison() {
         
