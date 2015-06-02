@@ -62,18 +62,22 @@ public class Interface {
     
     public void jouer() {
         // On rappelle où en est le joueur
+        
+        monopoly.getCurrentPlayer().setDoubleDe(false);
+        monopoly.getCurrentPlayer().setNbDouble(0);
+        
         Scanner sc = new Scanner(System.in);
         System.out.println("--------------------------");
-        System.out.println("------ Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
-        System.out.println("------ Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +" ---");
+        System.out.println("Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
+        System.out.println("Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau());
         System.out.println("--------------------------");
         
         // On lance les des et on avance
         System.out.println("Appuyez sur ENTRER pour lancer les dés");
         sc.nextLine();
         System.out.println(monopoly.lancerDes());
-        System.out.println("Vous avez");
         monopoly.getCurrentPlayer().avancer(monopoly.getCurrentPlayer().getDernierJetDes());
+        System.out.println("Vous arrivez sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau());
         
         
         // On effectue l'action sur la case
@@ -104,6 +108,22 @@ public class Interface {
                     )
                 +1)% monopoly.getJoueurs().size())
         );
+    }
+    
+    
+     // Fonctions d'affichage :
+    
+    
+    public String afficherLancerDe(int de1, int de2) {
+        return "Le résultat du premier dé est " + de1 + " et le résultat du deuxième est " + de2 + "\n Ce qui donne une somme de " + (de1 + de2);
+    }
+    
+    public String afficherAllerPrison() {
+        if (this.getMonopoly().getCurrentPlayer().getNbDouble() == 3) {
+            return "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il a fait 3 doubles d'affilé !";
+        } else {
+        return "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il est tombé sur la case prison !";
+        }
     }
     
     
