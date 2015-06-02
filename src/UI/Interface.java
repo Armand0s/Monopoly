@@ -114,15 +114,15 @@ public class Interface {
      // Fonctions d'affichage :
     
     
-    public String afficherLancerDe(int de1, int de2) {
-        return "Le résultat du premier dé est " + de1 + " et le résultat du deuxième est " + de2 + "\n Ce qui donne une somme de " + (de1 + de2);
+    public void afficherLancerDe(int de1, int de2) {
+        System.out.println("Le résultat du premier dé est " + de1 + " et le résultat du deuxième est " + de2 + "\n Ce qui donne une somme de " + (de1 + de2));
     }
     
-    public String afficherAllerPrison() {
+    public void afficherAllerPrison() {
         if (this.getMonopoly().getCurrentPlayer().getNbDouble() == 3) {
-            return "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il a fait 3 doubles d'affilé !";
+            System.out.println( "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il a fait 3 doubles d'affilé !");
         } else {
-        return "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il est tombé sur la case prison !";
+        System.out.println("Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il est tombé sur la case prison !");
         }
     }
     
