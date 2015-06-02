@@ -41,7 +41,10 @@ public class Monopoly {
         de1 = lancerDe();
         de2 = lancerDe();
         getCurrentPlayer().actionDouble(de1 == de2);
+        int des = de1 + de2;
+        getCurrentPlayer().setDernierJetDes(des);
         return "Vous lancez les dés qui tombent sur le chiffre " + de1 + " et " + de2 + ".";
+        
     }
         
     public Joueur getCurrentPlayer() {
@@ -107,26 +110,12 @@ public class Monopoly {
         
         
         public void payer(Joueur payeur, Joueur receveur, int somme) {
-            payeur.paye(somme);
+            payeur.removeCash(somme);
             receveur.addCash(somme);
             
         }
         
         
-        public void checkCarreau(Joueur joueur_jouant) { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
-           
-            Carreau c = joueur_jouant.getPositionCourante();
-            
-            if (c instanceof ProprieteAConstruire) {
-                Joueur proprio = c.getProprietaire();
-                if (proprio != null && proprio != this.getCurrentPlayer()) {
-                    //this.payer(joueur_jouant, proprio, this.getMontantAPayer(joueur_jouant, c));
-                }
-            } else { // (c instanceof CarreauAction)
-                // Faire la fonction pour déplcer ou payer suivant la carte mais réservé à la semaien bloquée je crois
-            }
-           
-        }
         
         public void checkPerdu(Joueur joueur) {
             if (joueur.getCash() <= 0) {
