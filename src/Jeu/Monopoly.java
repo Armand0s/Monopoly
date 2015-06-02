@@ -53,7 +53,10 @@ public class Monopoly {
             des = lancerDes();
             joueur.avancer(des);
             if (joueur.getNbDouble()==3){break;}
+            else{
+                joueur.actionCarreau();
             //diverses actions
+            }
         }while (joueur.getDoubleDe());
         if (joueur.getNbDouble()==3){
             joueur.allerPrison();

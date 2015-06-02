@@ -174,12 +174,12 @@ public class Joueur {
         
         
         
-        public String actionCarreau() { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
+        public void actionCarreau() { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
            
             Carreau cTemp = this.getPositionCourante();
             
-            if (cTemp instanceof ProprieteAConstruire) {
-                ProprieteAConstruire c = (ProprieteAConstruire) cTemp;
+            if (cTemp instanceof CarreauPropriete) {
+                CarreauPropriete c = (CarreauPropriete) cTemp;
                 Joueur proprio = c.getProprietaire();
                 if (proprio != null && proprio != this) {
                     int montantAPayer = c.getMontantAPayer();
@@ -190,7 +190,6 @@ public class Joueur {
             } else { // (c instanceof CarreauAction)
                 // Faire la fonction pour déplacer ou payer suivant la carte mais réservé à la semaien bloquée je crois
             }
-           return "blbl";
         }
         
         public void allerPrison() {
