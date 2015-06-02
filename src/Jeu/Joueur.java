@@ -12,6 +12,7 @@ public class Joueur {
 	private ArrayList<ProprieteAConstruire> proprietesAConstruire = new ArrayList<ProprieteAConstruire>();
         private boolean vientCarteChance;
         private int dernierJetDes;
+        private boolean drapeauPrison;
         
         private boolean doubleDe;
         private int nbDouble;
