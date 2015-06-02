@@ -188,5 +188,17 @@ public class Joueur {
            return "blbl";
         }
         
+        public String allerPrison() {
+            
+            this.setPositionCourante(monopoly.getCarreau(31)); // 31 = position de la prison
+            return "Le joueur " + this.getNomJoueur() + " va en prison !";
+        }
         
+        public void reculer(int nbcases) {
+            if (getPositionCourante().getNumero()-nbcases < 1) {
+                this.setPositionCourante(monopoly.getCarreau(getPositionCourante().getNumero() - nbcases + 40));
+            } else {
+                this.setPositionCourante(monopoly.getCarreau(getPositionCourante().getNumero() - nbcases));
+            }
+        }
 }
