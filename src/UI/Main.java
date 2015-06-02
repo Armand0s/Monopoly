@@ -8,6 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		Monopoly m = new Monopoly("src//Data//data.txt");
                 Interface inter = new Interface(m);
+                m.setInter(inter);
                 
                 inter.initialiserPartie();
                 
@@ -15,7 +16,7 @@ public class Main {
                     inter.jouer();
                 }
                 
-                System.out.println("Bravo ! Parfit finit !");
+                System.out.println("Bravo ! Parfait finit !");
                 System.out.println("Joueur " + m.getJoueurs().get(0).getNomJoueur() + " a gagné !");
 	}
 }
