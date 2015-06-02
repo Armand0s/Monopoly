@@ -62,19 +62,18 @@ public class Interface {
     
     public void jouer() {
         // On rappelle où en est le joueur
+        Scanner sc = new Scanner(System.in);
         System.out.println("--------------------------");
         System.out.println("------ Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
-        System.out.println("------ Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +"---");
+        System.out.println("------ Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau() +" ---");
         System.out.println("--------------------------");
         
         // On lance les des et on avance
         System.out.println("Appuyez sur ENTRER pour lancer les dés");
+        sc.nextLine();
         System.out.println(monopoly.lancerDes());
-        
         System.out.println("Vous avez");
-        
-        
-        
+        monopoly.getCurrentPlayer().avancer(monopoly.getCurrentPlayer().getDernierJetDes());
         
         
         // On effectue l'action sur la case
@@ -98,14 +97,12 @@ public class Interface {
         
         
         monopoly.setCurrentPlayer( // Incrémente le CurrentJoueur
-                monopoly.getJoueurs().get(
+                monopoly.getJoueurs().get((
                     monopoly.getJoueurs().indexOf( // int
-                        monopoly.getJoueurs().indexOf(
                             monopoly.getCurrentPlayer(
                             )
-                        )
-                    +1)
-                )
+                    )
+                +1)% monopoly.getJoueurs().size())
         );
     }
     
