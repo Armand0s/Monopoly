@@ -45,6 +45,15 @@ public class Monopoly {
         return de1 + de2;
         
     }
+    
+    
+    public void sortirPrison() {
+        
+    }
+    
+    
+    
+    
         
     public Joueur getCurrentPlayer() {
         return joueurs.get(numJoueur-1);
