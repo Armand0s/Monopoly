@@ -57,7 +57,12 @@ public class Joueur {
         if(doubleDe){
             incrNbDouble();
         }
+        if (this.nbDouble == 3) {
+            this.allerPrison();
+            setDoubleDe(false);
+        } else {
         setDoubleDe(doubleDe);
+        }
     }
         
         
@@ -188,10 +193,9 @@ public class Joueur {
            return "blbl";
         }
         
-        public String allerPrison() {
-            
+        public void allerPrison() {
             this.setPositionCourante(monopoly.getCarreau(31)); // 31 = position de la prison
-            return "Le joueur " + this.getNomJoueur() + " va en prison !";
+            this.monopoly.getInter().afficherAllerPrison();
         }
         
         public void reculer(int nbcases) {
