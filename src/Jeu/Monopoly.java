@@ -46,6 +46,19 @@ public class Monopoly {
         
     }
     
+    public void lancerDesEtAvancer(){
+        Joueur joueur = this.getCurrentPlayer();
+        int des;
+        do {
+            des = lancerDes();
+            joueur.avancer(des);
+            if (joueur.getNbDouble()==3){break;}
+            //diverses actions
+        }while (joueur.getDoubleDe());
+        if (joueur.getNbDouble()==3){
+            joueur.allerPrison();
+        }
+    }
     
     public void sortirPrison() {
         
