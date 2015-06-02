@@ -61,6 +61,7 @@ public class Monopoly {
         if (joueur.getNbDouble()==3){
             joueur.allerPrison();
         }
+        inter.afficherFinDuTour();
     }
     
     
@@ -269,16 +270,16 @@ public class Monopoly {
             return null;
         }
         
- /*       private void initCarte(){
+        private void initCarte(){
             for (CarteCaisseEnum carteCaisse : CarteCaisseEnum.values()){
-                carteCaisses.add(new CarteCaisse());
+                carteCaisses.add(new CarteCaisse(this, carteCaisse));
             }
             
             for (CarteChanceEnum carteChance : CarteChanceEnum.values()){
-                carteChances.add(new CarteChances());
+                carteChances.add(new CarteChance(this, carteChance));
             }
         }
-*/	
+	
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
 	{
 		ArrayList<String[]> data = new ArrayList<String[]>();

@@ -9,6 +9,10 @@ package Jeu;
 public abstract class Carte {
     private Monopoly monopoly;
     
+    public Carte(Monopoly monopoly){
+        setMonopoly(monopoly);
+    }
+    
     public Monopoly getMonopoly(){
         return monopoly;
     }

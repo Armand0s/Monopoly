@@ -2,6 +2,7 @@ package UI;
 
 import Jeu.Monopoly;
 import java.util.Scanner;
+import Jeu.Joueur;
 
 public class Interface {
 	public Monopoly monopoly;
@@ -61,23 +62,25 @@ public class Interface {
     }
     
     public void jouer() {
+        Joueur joueur = monopoly.getCurrentPlayer();
         // On rappelle où en est le joueur
         
-        monopoly.getCurrentPlayer().setDoubleDe(false);
-        monopoly.getCurrentPlayer().setNbDouble(0);
+        joueur.setDoubleDe(false);
+        joueur.setNbDouble(0);
         
         Scanner sc = new Scanner(System.in);
         System.out.println("--------------------------");
-        System.out.println("Joueur : " + monopoly.getCurrentPlayer().getNomJoueur());
-        System.out.println("Vous êtes sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau());
+        System.out.println("Joueur : " + joueur.getNomJoueur());
+        System.out.println("Vous êtes sur la case : " + joueur.getPositionCourante().getNomCarreau());
         System.out.println("--------------------------");
         
         // On lance les des et on avance
         System.out.println("Appuyez sur ENTRER pour lancer les dés");
         sc.nextLine();
-        System.out.println(monopoly.lancerDes());
-        monopoly.getCurrentPlayer().avancer(monopoly.getCurrentPlayer().getDernierJetDes());
-        System.out.println("Vous arrivez sur la case : " + monopoly.getCurrentPlayer().getPositionCourante().getNomCarreau());
+        monopoly.lancerDesEtAvancer();
+        //System.out.println(monopoly.lancerDes());
+        //monopoly.getCurrentPlayer().avancer(monopoly.getCurrentPlayer().getDernierJetDes());
+        System.out.println("Vous arrivez sur la case : " + joueur.getPositionCourante().getNomCarreau());
         
         
         // On effectue l'action sur la case
@@ -103,8 +106,7 @@ public class Interface {
         monopoly.setCurrentPlayer( // Incrémente le CurrentJoueur
                 monopoly.getJoueurs().get((
                     monopoly.getJoueurs().indexOf( // int
-                            monopoly.getCurrentPlayer(
-                            )
+                            joueur
                     )
                 +1)% monopoly.getJoueurs().size())
         );
@@ -126,5 +128,8 @@ public class Interface {
         }
     }
     
-    
+    public void afficherFinDuTour(){
+        Joueur joueur = monopoly.getCurrentPlayer();
+        System.out.println(joueur.getNomJoueur() + " a fini son tour.");
+    }
 }

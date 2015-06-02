@@ -1,7 +1,19 @@
 package Jeu;
 
-public abstract class CarteCaisse extends Carte {
+public class CarteCaisse extends Carte {
 	private CarteCaisseEnum action;
+        
+        public CarteCaisse(Monopoly monopoly, CarteCaisseEnum action){
+            super(monopoly);
+            setAction(action);
+        }
+        
+        public CarteCaisseEnum getAction(){
+            return action;
+        }
+        private void setAction(CarteCaisseEnum action){
+            this.action = action;
+        }
         
         public void actionAEffectuer (CarteCaisseEnum action){
             Joueur joueur = this.getMonopoly().getCurrentPlayer();
