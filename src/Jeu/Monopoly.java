@@ -73,8 +73,20 @@ public class Monopoly {
     
     
     
+    public LinkedList<CarteChance> getCarteChances(){
+        return this.carteChances;
+    }
+    public void setCarteChances(LinkedList<CarteChance> carteChances){
+        this.carteChances = carteChances;
+    }
+       
+    public LinkedList<CarteCaisse> getCarteCaisses(){
+        return this.carteCaisses;
+    }
+    public void setCarteCaisses(LinkedList<CarteCaisse> carteCaisses){
+        this.carteCaisses = carteCaisses;
+    }
     
-        
     public Joueur getCurrentPlayer() {
         return joueurs.get(numJoueur-1);
     }
