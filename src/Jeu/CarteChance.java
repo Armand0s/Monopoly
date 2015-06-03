@@ -15,8 +15,10 @@ public class CarteChance extends Carte {
             this.action = action;
         }
         
-        public void actionAEffectuer (CarteChanceEnum action){
+        public void actionAEffectuer (){
             Joueur joueur = this.getMonopoly().getCurrentPlayer();
+            CarteChanceEnum action = this.getAction();
+            this.getMonopoly().getInter().afficherActionCarteChance(action);
             switch(action){
                 case libere_prison:
                     break;
@@ -51,19 +53,19 @@ public class CarteChance extends Carte {
                     reculez3Cases(joueur);
                     break;
                 case avancez_depart:
-                    avancezDepart();
+                    avancezDepart(joueur);
                     break;
                 case avancez_rue_paix:
-                    avancezRuePaix();
+                    avancezRuePaix(joueur);
                     break;
                 case avancez_henri_martin:
-                    avancezHenriMartin();
+                    avancezHenriMartin(joueur);
                     break;
                 case avancez_gare_lyon:
-                    avancezGareLyon();
+                    avancezGareLyon(joueur);
                     break;
                 case avancez_boulevard_villette:
-                    avancezBoulevardVillette();
+                    avancezBoulevardVillette(joueur);
                     break;
                 default:
             }
@@ -103,19 +105,19 @@ public class CarteChance extends Carte {
         public void reculez3Cases(Joueur joueur){
             joueur.reculer(3);
         }
-        public void avancezDepart(){
-            avancerCarte(1);
+        public void avancezDepart(Joueur joueur){
+            joueur.avancerCarte(1);
         }
-        public void avancezRuePaix(){
-            avancerCarte(40);
+        public void avancezRuePaix(Joueur joueur){
+            joueur.avancerCarte(40);
         }
-        public void avancezHenriMartin(){
-            avancerCarte(25);
+        public void avancezHenriMartin(Joueur joueur){
+            joueur.avancerCarte(25);
         }
-        public void avancezGareLyon(){
-            avancerCarte(16);
+        public void avancezGareLyon(Joueur joueur){
+            joueur.avancerCarte(16);
         }
-        public void avancezBoulevardVillette(){
-            avancerCarte(12);
+        public void avancezBoulevardVillette(Joueur joueur){
+            joueur.avancerCarte(12);
         }
 }
