@@ -15,8 +15,10 @@ public class CarteCaisse extends Carte {
             this.action = action;
         }
         
-        public void actionAEffectuer (CarteCaisseEnum action){
+        public void actionAEffectuer (){
             Joueur joueur = this.getMonopoly().getCurrentPlayer();
+            CarteCaisseEnum action = this.getAction();
+            this.getMonopoly().getInter().afficherActionCarteCaisse(action);
             switch(action){
                 case libere_prison:
                     break;
@@ -63,7 +65,7 @@ public class CarteCaisse extends Carte {
                     reculezBelleville(joueur);
                     break;
                 case avancez_depart:
-                    avancezDepart();
+                    avancezDepart(joueur);
                     break;
                 default:
             }
@@ -112,7 +114,7 @@ public class CarteCaisse extends Carte {
         public void reculezBelleville(Joueur joueur){
             joueur.setPositionCourante(this.getMonopoly().getCarreau(2));
         }
-        public void avancezDepart(){
-            avancerCarte(1);
+        public void avancezDepart(Joueur joueur){
+            joueur.avancerCarte(1);
         }
 }
