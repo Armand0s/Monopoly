@@ -20,15 +20,4 @@ public abstract class Carte {
         this.monopoly = monopoly;
     }
     
-    public void avancerCarte(int numcase){
-        Joueur joueur = monopoly.getCurrentPlayer();
-        int i = joueur.getPositionCourante().getNumero();
-            if (i > numcase){
-                i = 40-i + numcase;
-            }
-            else {
-                i = numcase-i;
-            }
-            joueur.avancer(i);
-        }
 }
