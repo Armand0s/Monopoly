@@ -13,6 +13,8 @@ public class Joueur {
         private boolean vientCarteChance;
         private int dernierJetDes;
         private boolean drapeauPrison;
+        private boolean carteChanceLibere = false;
+        private boolean carteCaisseLibere = false;
         
         private boolean doubleDe;
         private int nbDouble;
@@ -173,7 +175,19 @@ public class Joueur {
             return i;
         }
         
+        public boolean getCarteChanceLibere(){
+            return this.carteChanceLibere;
+        }
+        public void setCarteChanceLibere(boolean carteChanceLibere){
+            this.carteChanceLibere = carteChanceLibere;
+        }
         
+        public boolean getCarteCaisseLibere(){
+            return this.carteCaisseLibere;
+        }
+        public void setCarteCaisseLibere(boolean carteCaisseLibere){
+            this.carteCaisseLibere = carteCaisseLibere;
+        }
         
         public void actionCarreau() { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
            
@@ -204,5 +218,17 @@ public class Joueur {
             } else {
                 this.setPositionCourante(monopoly.getCarreau(getPositionCourante().getNumero() - nbcases));
             }
+        }
+        
+        public void avancerCarte(int numcase){ // Méthode appelée exclusivement par une Carte (Chance ou Caisse)
+        Joueur joueur = monopoly.getCurrentPlayer();
+        int i = joueur.getPositionCourante().getNumero();
+            if (i > numcase){
+                i = 40-i + numcase;
+            }
+            else {
+                i = numcase-i;
+            }
+            joueur.avancer(i);
         }
 }
