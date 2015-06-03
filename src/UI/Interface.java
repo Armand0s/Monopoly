@@ -1,5 +1,7 @@
 package UI;
 
+import Jeu.CarteCaisseEnum;
+import Jeu.CarteChanceEnum;
 import Jeu.Monopoly;
 import java.util.Scanner;
 import Jeu.Joueur;
@@ -124,12 +126,24 @@ public class Interface {
         if (this.getMonopoly().getCurrentPlayer().getNbDouble() == 3) {
             System.out.println( "Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il a fait 3 doubles d'affilé !");
         } else {
-        System.out.println("Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison car il est tombé sur la case prison !");
+        System.out.println("Le joueur " + this.getMonopoly().getCurrentPlayer().getNomJoueur() + " va en prison!");
         }
     }
     
     public void afficherFinDuTour(){
         Joueur joueur = monopoly.getCurrentPlayer();
         System.out.println(joueur.getNomJoueur() + " a fini son tour.");
+    }
+    
+    public void afficherActionCarteChance(CarteChanceEnum action){
+        System.out.println("************** Carte Chance **************");
+        System.out.println(action.toString());
+        System.out.println("******************************************");
+    }
+    
+    public void afficherActionCarteCaisse(CarteCaisseEnum action){
+        System.out.println("********** Caisse de communauté **********");
+        System.out.println(action.toString());
+        System.out.println("******************************************");
     }
 }
