@@ -54,20 +54,7 @@ public class Joueur {
     
     public void incrNbDouble(){
         this.nbDouble += 1;
-    }
-
-    public void actionDouble(boolean doubleDe){
-        if(doubleDe){
-            incrNbDouble();
-        }
-        if (this.nbDouble == 3) {
-            this.allerPrison();
-            setDoubleDe(false);
-        } else {
-        setDoubleDe(doubleDe);
-        }
-    }
-        
+    }        
         
         public String getNomJoueur() {
             return nomJoueur;
