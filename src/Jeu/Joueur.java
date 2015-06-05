@@ -210,7 +210,7 @@ public class Joueur {
         }
         
         public void allerPrison() {
-            this.setPositionCourante(monopoly.getCarreau(31)); // 31 = position de la prison
+            this.setPositionCourante(monopoly.getCarreau(11)); // 11 = position de la prison
             this.setDrapeauPrison(true);
             this.monopoly.getInter().afficherAllerPrison();
         }
