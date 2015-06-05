@@ -41,28 +41,27 @@ public class Monopoly {
         int de2;
         de1 = lancerDe();
         de2 = lancerDe();
-        getCurrentPlayer().actionDouble(de1 == de2);
+        getCurrentPlayer().setDoubleDe(de1 == de2);
         inter.afficherLancerDe(de1,de2);
         return de1 + de2;
         
     }
     
+    // Lance les des et le fais avancer normalement ou en prison
     public void lancerDesEtAvancer(){
         Joueur joueur = this.getCurrentPlayer();
         int des;
-        do {
-            des = lancerDes();
-            joueur.avancer(des);
-            if (joueur.getNbDouble()==3){break;}
-            else{
-                joueur.actionCarreau();
-            //diverses actions
-            }
-        }while (joueur.getDoubleDe());
-        if (joueur.getNbDouble()==3){
+
+        des = lancerDes();
+        // Si il fait un double on incremente
+        if (joueur.getDoubleDe()) {joueur.incrNbDouble();}
+        
+        if (joueur.getNbDouble() == 3){
             joueur.allerPrison();
+        } else {
+            joueur.avancer(des);
         }
-        inter.afficherFinDuTour();
+        inter.afficherEtatJoueur(joueur);
     }
     
     
