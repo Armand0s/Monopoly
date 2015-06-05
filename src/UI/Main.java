@@ -12,11 +12,11 @@ public class Main {
                 
                 inter.initialiserPartie();
                 
-                while (m.getJoueurs().size() !=1) {
+                while (m.getJoueurs().size() != 1) {
                     inter.jouer();
                 }
                 
-                System.out.println("Bravo ! Parfait finit !");
+                System.out.println("Bravo ! Partie finit !");
                 System.out.println("Joueur " + m.getJoueurs().get(0).getNomJoueur() + " a gagné !");
 	}
 }
