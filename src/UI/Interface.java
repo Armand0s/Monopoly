@@ -146,4 +146,8 @@ public class Interface {
         System.out.println(action.toString());
         System.out.println("******************************************");
     }
+    
+    public void afficherEtatJoueur(Joueur j){
+        
+    }
 }
