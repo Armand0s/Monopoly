@@ -26,6 +26,7 @@ public class Monopoly {
                 carreaux = new HashMap<>();    
                 initGroupe();
 		buildGamePlateau(dataFilename);
+                initCarte();
 	}
         
     public int lancerDe() {
