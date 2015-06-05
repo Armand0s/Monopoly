@@ -1,8 +1,5 @@
 package Jeu;
 
-import static Jeu.CarteChanceEnum.libere_prison;
-import static Jeu.CarteCaisseEnum.libere_prison;
-
 public class CarreauTirage extends CarreauAction {
 
     public CarreauTirage(int numero, String nomCarreau, Monopoly monopoly) {
