@@ -65,7 +65,7 @@ public class Interface {
     
     public void jouer() {
         Joueur joueur = monopoly.getCurrentPlayer();
-        this.afficherEtatJoueur(joueur);
+        this.afficherEtatDebutTour();
         
         // On rappelle où en est le joueur
         Scanner sc = new Scanner(System.in);
@@ -153,5 +153,9 @@ public class Interface {
     public void afficherEtatJoueur(Joueur j){
         System.out.println("Vous faites un lancé de " + j.getDernierJetDes());
         System.out.println("Vous arrivez sur la case : " + j.getPositionCourante().getNomCarreau());
+    }
+    
+    public void afficherEtatDebutTour(){
+        System.out.println("Ceci est un debut de tour");
     }
 }
