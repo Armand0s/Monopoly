@@ -283,12 +283,20 @@ public class Monopoly {
         }
         
         private void initCarte(){
+            Random res = new Random();
+            LinkedList<CarteCaisse> carteCaissesTemp = new LinkedList();
             for (CarteCaisseEnum carteCaisse : CarteCaisseEnum.values()){
-                carteCaisses.add(new CarteCaisse(this, carteCaisse));
+                carteCaissesTemp.add(new CarteCaisse(this, carteCaisse));
             }
-            
+            for (int i = carteCaissesTemp.size(); i!=0; i--){
+                carteCaisses.add(carteCaissesTemp.remove(res.nextInt(i-1)));
+            }
+            LinkedList<CarteChance> carteChancesTemp = new LinkedList();
             for (CarteChanceEnum carteChance : CarteChanceEnum.values()){
-                carteChances.add(new CarteChance(this, carteChance));
+                carteChancesTemp.add(new CarteChance(this, carteChance));
+            }
+            for (int i = carteChancesTemp.size(); i!=0; i--){
+                carteChances.add(carteChancesTemp.remove(res.nextInt(i-1)));
             }
         }
 	
