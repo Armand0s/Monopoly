@@ -65,24 +65,27 @@ public class Interface {
     
     public void jouer() {
         Joueur joueur = monopoly.getCurrentPlayer();
+        this.afficherEtatJoueur(joueur);
+        
         // On rappelle où en est le joueur
-        
-        joueur.setDoubleDe(false);
-        joueur.setNbDouble(0);
-        
         Scanner sc = new Scanner(System.in);
         System.out.println("--------------------------");
         System.out.println("Joueur : " + joueur.getNomJoueur());
         System.out.println("Vous êtes sur la case : " + joueur.getPositionCourante().getNomCarreau());
         System.out.println("--------------------------");
         
+        
         // On lance les des et on avance
-        System.out.println("Appuyez sur ENTRER pour lancer les dés");
-        sc.nextLine();
-        monopoly.lancerDesEtAvancer();
-        //System.out.println(monopoly.lancerDes());
-        //monopoly.getCurrentPlayer().avancer(monopoly.getCurrentPlayer().getDernierJetDes());
-        System.out.println("Vous arrivez sur la case : " + joueur.getPositionCourante().getNomCarreau());
+        joueur.setDoubleDe(true); // Nécessaire pour que la boucle se lance
+        joueur.setNbDouble(0);
+        while (joueur.getDoubleDe() == true && joueur.getDrapeauPrison() == false){
+            System.out.println("Appuyez sur ENTRER pour lancer les dés");
+            sc.nextLine();
+            
+            monopoly.lancerDesEtAvancer(); // Lance les des et affiche l'etat du joueur
+  
+        }
+
         
         
         // On effectue l'action sur la case
@@ -148,6 +151,7 @@ public class Interface {
     }
     
     public void afficherEtatJoueur(Joueur j){
-        
+        System.out.println("Vous faites un lancé de " + j.getDernierJetDes());
+        System.out.println("Vous arrivez sur la case : " + j.getPositionCourante().getNomCarreau());
     }
 }
