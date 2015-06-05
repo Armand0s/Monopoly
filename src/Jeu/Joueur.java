@@ -202,7 +202,15 @@ public class Joueur {
                 } else if (proprio == null) {
                     //getMonopoly().getInter().proposerAchat();
                 }
-            } else { // (c instanceof CarreauAction)
+            }
+            else {//(cTemp instanceof CarreauAction)
+                if (cTemp instanceof CarreauTirage){
+                    CarreauTirage c = (CarreauTirage) cTemp;
+                    c.tirerCarte();
+                }
+                else if (cTemp instanceof CarreauArgent){
+                    
+                }
                 // Faire la fonction pour déplacer ou payer suivant la carte mais réservé à la semaien bloquée je crois
             }
         }
