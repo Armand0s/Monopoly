@@ -36,25 +36,25 @@ public class Joueur {
             }
         }
 
-    public boolean getDoubleDe() {
-        return doubleDe;
-    }
+        public boolean getDoubleDe() {
+            return doubleDe;
+        }
 
-    public void setDoubleDe(boolean doubleDe) {
-        this.doubleDe = doubleDe;
-    }
+        public void setDoubleDe(boolean doubleDe) {
+            this.doubleDe = doubleDe;
+        }
 
-    public int getNbDouble() {
-        return nbDouble;
-    }
+        public int getNbDouble() {
+            return nbDouble;
+        }
 
-    public void setNbDouble(int nbDouble) {
-        this.nbDouble = nbDouble;
-    }
-    
-    public void incrNbDouble(){
-        this.nbDouble += 1;
-    }        
+        public void setNbDouble(int nbDouble) {
+            this.nbDouble = nbDouble;
+        }
+
+        public void incrNbDouble(){
+            this.nbDouble += 1;
+        }        
         
         public String getNomJoueur() {
             return nomJoueur;
@@ -176,6 +176,13 @@ public class Joueur {
             this.carteCaisseLibere = carteCaisseLibere;
         }
         
+        public boolean getDrapeauPrison(){
+            return this.drapeauPrison;
+        }
+        public void setDrapeauPrison(boolean drapeauPrison){
+            this.drapeauPrison = drapeauPrison;
+        }
+        
         public void actionCarreau() { //regarde l'etat de la case propriete sur laquelle est tombé le joueur
            
             Carreau cTemp = this.getPositionCourante();
@@ -204,6 +211,7 @@ public class Joueur {
         
         public void allerPrison() {
             this.setPositionCourante(monopoly.getCarreau(31)); // 31 = position de la prison
+            this.setDrapeauPrison(true);
             this.monopoly.getInter().afficherAllerPrison();
         }
         
