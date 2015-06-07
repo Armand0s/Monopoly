@@ -6,6 +6,7 @@ public class Compagnie extends CarreauPropriete {
             super(numero, nomCarreau, monopoly, prixAchat);
         }
         
+        @Override
         public int getMontantAPayer(){
             int argent;
             int nbrCompagnie = getProprietaire().getNbCompanies();
