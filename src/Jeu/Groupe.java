@@ -6,7 +6,7 @@ public class Groupe {
 	private CouleurPropriete couleur;
 	private int prixAchatMaison;
 	private int prixAchatHotel;
-	private ArrayList<ProprieteAConstruire> proprietes = new ArrayList<ProprieteAConstruire>();
+	private ArrayList<ProprieteAConstruire> proprietes = new ArrayList<>();
 
     public Groupe(CouleurPropriete couleur, int prixAchatMaison, int prixAchatHotel) {
         this.couleur = couleur;
@@ -54,6 +54,22 @@ public class Groupe {
             }
         }
         return res;
+    }
+    
+    public int nbrMaisonsConstruites(){
+        int nbrMaisonsConstruites = 0;
+        for (ProprieteAConstruire p : this.getProprietes()){
+            nbrMaisonsConstruites += p.getNbMaisons();
+        }
+        return nbrMaisonsConstruites;
+    }
+    
+    public int nbrHotelsConstruits(){
+        int nbrHotelsConstruits = 0;
+        for (ProprieteAConstruire p : this.getProprietes()){
+            nbrHotelsConstruits += p.getNbHotel();
+        }
+        return nbrHotelsConstruits;
     }
         
 }
