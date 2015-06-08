@@ -1,10 +1,14 @@
 package UI;
 
+import Jeu.CarreauPropriete;
 import Jeu.CarteCaisseEnum;
 import Jeu.CarteChanceEnum;
 import Jeu.Monopoly;
 import java.util.Scanner;
 import Jeu.Joueur;
+import Jeu.ProprieteAConstruire;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 
 public class Interface {
 	public Monopoly monopoly;
@@ -122,7 +126,7 @@ public class Interface {
     
     
     public void afficherLancerDe(int de1, int de2) {
-        System.out.println("Le résultat du premier dé est " + de1 + " et le résultat du deuxième est " + de2 + "\n Ce qui donne une somme de " + (de1 + de2));
+        System.out.println("Le résultat du premier dé est " + de1 + " et le résultat du deuxième est " + de2 + "\nCe qui donne une somme de " + (de1 + de2));
     }
     
     public void afficherAllerPrison() {
@@ -156,6 +160,59 @@ public class Interface {
     }
     
     public void afficherEtatDebutTour(){
-        System.out.println("Ceci est un debut de tour");
+        for (Joueur joueur : getMonopoly().getJoueurs()){
+            System.out.println(" - Le joueur " + joueur.getNomJoueur() + " se trouve sur la case "
+                    + joueur.getPositionCourante().getNumero() + " : "
+                    + joueur.getPositionCourante().getNomCarreau());
+        }
     }
+    
+    public void afficheMontantAPayer(Joueur proprio, int montant){
+        System.out.println("Vous payez " + montant + " au joueur " + proprio.getNomJoueur());
+    }
+    
+    public boolean proposerAchat(CarreauPropriete c){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Voulez vous acheter " + c.getNomCarreau() + " pour la somme de " + c.getPrixAchat() + " ? (oui/non)");
+        String choix = sc.nextLine();
+        while (!"oui".equals(choix) & !"non".equals(choix)){
+            System.out.println("Je n'ai pas compris votre choix");
+            System.out.println("oui/non : ");
+            choix = sc.nextLine();
+        }
+            return "oui".equals(choix);
+    }
+    
+    public boolean proposerConstruction(int prix, String construction){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Voulez vous construire " + construction + " pour la somme de " + prix + " ? (oui/non)");
+        String choix = sc.nextLine();
+        while (!"oui".equals(choix) & !"non".equals(choix)){
+            System.out.println("Je n'ai pas compris votre choix");
+            System.out.println("oui/non : ");
+            choix = sc.nextLine();
+        }
+            return "oui".equals(choix);
+    }
+    
+    public void afficherArgentJoueur(Joueur j){
+        System.out.println("Vous possédez actuellement " + j.getCash());
+    }
+    
+    public int demandeTerrainOuConstruire(ArrayList<ProprieteAConstruire> proprietesConstructible){
+        Scanner sc = new Scanner(System.in);
+        int choix = 0;
+        
+        System.out.println("Vous pouvez construire sur les terrains suivant :");
+        for (int i = 1; i < proprietesConstructible.size(); i++){
+            System.out.println(i + ". " + proprietesConstructible.get(i).getNomCarreau());
+        }
+        System.out.println("Où voulez vous construire ?");
+        while (choix < 1 | choix > proprietesConstructible.size()){
+            System.out.println("Je n'ai pas compris votre demande");
+            choix = sc.nextInt();
+        }
+        return choix;
+    }
+
 }
