@@ -22,6 +22,10 @@ public class ProprieteAConstruire extends CarreauPropriete {
         public void setNbMaisons(int nbMaisons) {
             this.nbMaisons = nbMaisons;
         }
+        
+        public void construireMaison(){
+            this.nbMaisons += 1;
+        }
 
         public int getNbHotel() {
             return nbHotel;
