@@ -72,8 +72,21 @@ public class Joueur {
         public void addCash(int cash){
             this.setCash(this.getCash() + cash);
         }
-        public void removeCash(int cash){
-            this.setCash(this.getCash() - cash);
+
+        /**
+         * Réduit le capital financier du joueur
+         * @param cash L'argent à enlevé au joueur
+         * @return L'argent réellement enlevé au joueur.
+         */
+        public int removeCash(int cash){
+            int cashJoueur = this.getCash();
+            if (cashJoueur >= cash){ // Si le joueur a asser d'argent on lui enleve cash
+                this.setCash(cashJoueur - cash);
+                return cash; // Et on retourne cash
+            } else { // Sinon, on lui enlève toute son argent
+                this.setCash(0);
+                return cashJoueur; // et on retourne ce qu'il avait
+            }
         }
 
         public Monopoly getMonopoly() {
@@ -83,19 +96,57 @@ public class Joueur {
             this.monopoly = monopoly;
         }
 
+        
         public ArrayList<Compagnie> getCompagnies() {
             return compagnies;
         }
-        public void setCompagnies(ArrayList<Compagnie> compagnies) {
+        private void setCompagnies(ArrayList<Compagnie> compagnies) {
             this.compagnies = compagnies;
         }
+        private void addCompagnie(Compagnie compagnie){
+            this.compagnies.add(compagnie);
+        }
+        
 
         public ArrayList<Gare> getGares() {
             return gares;
         }
-        public void setGares(ArrayList<Gare> gares) {
+        private void setGares(ArrayList<Gare> gares) {
             this.gares = gares;
         }
+        private void addGare(Gare Gare){
+            this.gares.add(Gare);
+        }
+        
+
+        public ArrayList<ProprieteAConstruire> getProprietesAConstruire() {
+            return proprietesAConstruire;
+        }
+        private void setProprietesAConstruire(ArrayList<ProprieteAConstruire> proprietesAConstruire) {
+            this.proprietesAConstruire = proprietesAConstruire;
+        }
+        
+        private void addProprieteAConstruire(ProprieteAConstruire propriete){
+            this.proprietesAConstruire.add(propriete);
+        }
+        
+        /**
+         * Convertie et ajoute la propriete c aux propriete du joueur
+         * @param c Le CarreauPropriete à ajouter au joueur
+         */
+        public void ajouterPropriete(CarreauPropriete c){
+            if (c instanceof Compagnie){
+                Compagnie compagnie = (Compagnie) c;
+                this.addCompagnie(compagnie);
+            } else if (c instanceof Gare){
+                Gare gare = (Gare) c;
+                this.addGare(gare);
+            } else if (c instanceof ProprieteAConstruire){
+                ProprieteAConstruire propriete = (ProprieteAConstruire) c;
+                this.addProprieteAConstruire(propriete);
+            }
+        }
+        
 
         public Carreau getPositionCourante() {
             return positionCourante;
@@ -104,23 +155,11 @@ public class Joueur {
             //if (this.getPositionCourante() ==  // Cheacker si il vient d'une carte chance ou pas
             this.positionCourante = positionCourante;
         }
-
-        public ArrayList<ProprieteAConstruire> getProprietesAConstruire() {
-            return proprietesAConstruire;
-        }
-        public void setProprietesAConstruire(ArrayList<ProprieteAConstruire> proprietesAConstruire) {
-            this.proprietesAConstruire = proprietesAConstruire;
-        }
+        
         
         public void payer(Joueur joueur, int montant){
-            if (this.getCash() >= montant){
-                this.removeCash(montant);
-                joueur.addCash(montant);
-            } else {
-                int argentJoueur = this.getCash();
-                this.removeCash(argentJoueur);
-                joueur.addCash(argentJoueur);
-            }
+            int montantEffectif = removeCash(montant);
+            joueur.addCash(montantEffectif);
         }
         
         public int getNbGare() {
@@ -189,12 +228,29 @@ public class Joueur {
             
             if (cTemp instanceof CarreauPropriete) {
                 CarreauPropriete c = (CarreauPropriete) cTemp;
-                Joueur proprio = c.getProprietaire();
+                Joueur proprio = c.getProprietaire(); 
+                
+                // Si le propriétaire est un autre joueur on paye le loyer
                 if (proprio != null && proprio != this) {
                     int montantAPayer = c.getMontantAPayer();
+                    getMonopoly().getInter().afficheMontantAPayer(proprio, montantAPayer);
                     this.payer(proprio, montantAPayer);
+                    
+                // Si y a pas de proprio on regarde si on peut lui proposer l'achat
                 } else if (proprio == null) {
-                    //getMonopoly().getInter().proposerAchat();
+                    // Si il a assez d'argent
+                    if (this.getCash() >= c.getPrixAchat()){
+                        // Et qu'il accepte l'achat
+                        if (getMonopoly().getInter().proposerAchat(c)){
+                            this.removeCash(c.getPrixAchat());
+                            this.ajouterPropriete(c);
+                            c.setProprietaire(this);
+                        }
+                    }
+                    
+                // Enfin, si il est lui même propriétaire, il peut construire
+                } else if (proprio == this){
+                    //this.construire();
                 }
             }
             else {//(cTemp instanceof CarreauAction)
@@ -233,5 +289,59 @@ public class Joueur {
                 i = numcase-i;
             }
             joueur.avancer(i);
+        }
+        
+        public boolean peutConstruire(){
+            Carreau c = this.getPositionCourante();
+            if (c instanceof ProprieteAConstruire){
+                ProprieteAConstruire propriete = (ProprieteAConstruire) c;
+                Groupe g = propriete.getGroupePropriete();
+                return g.groupePossede(this);
+            }
+            return false;
+        }
+        
+        /**
+         * Lance la procédure de construction
+         * (nécessite que peutConstruire soit vrai)
+         */
+        public void construire(){
+            ProprieteAConstruire propriete = (ProprieteAConstruire) this.getPositionCourante();
+            Groupe groupe = propriete.getGroupePropriete();
+            ArrayList<ProprieteAConstruire> proprietes = groupe.getProprietes();
+            ArrayList<ProprieteAConstruire> proprietesConstructible = new ArrayList<>();
+            int nbrMaisonsConstruitesTotales = groupe.nbrMaisonsConstruites();
+            int nbrHotelsConstruitsTotals = groupe.nbrHotelsConstruits();
+            boolean choix = true;
+            int choixTerrainOuConstruire;
+            
+            // TANT QUE le joueur n'a pas construit toute les maisons qu'il faut
+            // Que la banque à encore des maisons
+            // Que le joueur a assez d'argent
+            // Et qu'il a dis oui pour construire une maison précédemment
+            while (nbrMaisonsConstruitesTotales < proprietes.size() &  nbrHotelsConstruitsTotals == 0
+                    & getMonopoly().getNbMaisons() > 1
+                    & this.getCash() < groupe.getPrixAchatMaison()){
+                
+                // On demande si il veut construire une maison
+                getMonopoly().getInter().afficherArgentJoueur(this);
+                choix = getMonopoly().getInter().proposerConstruction(groupe.getPrixAchatMaison(), "une maison");
+                
+                // Si il est d'accord
+                if (choix) {
+                    proprietesConstructible.clear();
+                    for (ProprieteAConstruire prop : proprietes){
+                        if (((float) nbrMaisonsConstruitesTotales / (float) proprietes.size()) > (float) prop.getNbMaisons()){
+                            proprietesConstructible.add(prop);
+                        }
+                    }
+                    
+                    choixTerrainOuConstruire = getMonopoly().getInter().demandeTerrainOuConstruire(proprietesConstructible);
+                    proprietesConstructible.get(choixTerrainOuConstruire).construireMaison();
+                }
+            }
+            
+            
+            
         }
 }
