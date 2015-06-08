@@ -23,6 +23,14 @@ public class ProprieteAConstruire extends CarreauPropriete {
             this.nbMaisons = nbMaisons;
         }
 
+        public int getNbHotel() {
+            return nbHotel;
+        }
+
+        public void setNbHotel(int nbHotel) {
+            this.nbHotel = nbHotel;
+        }
+
         @Override   
         public int getMontantAPayer() {
             Joueur prop = getProprietaire();
@@ -43,14 +51,6 @@ public class ProprieteAConstruire extends CarreauPropriete {
 
         public void setLoyers(ArrayList<Integer> loyerMaison) {
             this.loyers = loyerMaison;
-        }
-
-        public int getNbHotel() {
-            return nbHotel;
-        }
-
-        public void setNbHotel(int nbHotel) {
-            this.nbHotel = nbHotel;
         }
 
         public Groupe getGroupePropriete() {
