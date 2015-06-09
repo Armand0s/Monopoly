@@ -41,9 +41,11 @@ public class Groupe {
     public ArrayList<ProprieteAConstruire> getProprietes() {
         return proprietes;
     }
-
     public void setProprietes(ArrayList<ProprieteAConstruire> proprietes) {
         this.proprietes = proprietes;
+    }
+    protected void addProprietes(ProprieteAConstruire c){
+        this.proprietes.add(c);
     }
         
     public boolean groupePossede(Joueur joueur){
