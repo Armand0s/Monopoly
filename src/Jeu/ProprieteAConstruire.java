@@ -13,6 +13,7 @@ public class ProprieteAConstruire extends CarreauPropriete {
             super(numero, nomCarreau, monopoly, prixAchat);
             setLoyers(loyers);
             setGroupePropriete(groupePropriete);
+            groupePropriete.addProprietes(this);
         }
 
         public int getNbMaisons() {
