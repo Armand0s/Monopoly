@@ -319,9 +319,10 @@ public class Joueur {
             // Que la banque à encore des maisons
             // Que le joueur a assez d'argent
             // Et qu'il a dis oui pour construire une maison précédemment
-            while (nbrMaisonsConstruitesTotales < proprietes.size() &  nbrHotelsConstruitsTotals == 0
-                    & getMonopoly().getNbMaisons() > 1
-                    & this.getCash() < groupe.getPrixAchatMaison()){
+            while (nbrMaisonsConstruitesTotales < proprietes.size()*4 &  nbrHotelsConstruitsTotals == 0
+                    & getMonopoly().getNbMaisons() > 0
+                    & this.getCash() > groupe.getPrixAchatMaison()
+                    & choix){
                 
                 // On demande si il veut construire une maison
                 getMonopoly().getInter().afficherArgentJoueur(this);
@@ -331,15 +332,63 @@ public class Joueur {
                 if (choix) {
                     proprietesConstructible.clear();
                     for (ProprieteAConstruire prop : proprietes){
-                        if (((float) nbrMaisonsConstruitesTotales / (float) proprietes.size()) > (float) prop.getNbMaisons()){
+                        // On récupère les proprietes qui ont un nombre de maison inférieur à la moyenne
+                        if (((float) nbrMaisonsConstruitesTotales / (float) proprietes.size()) >= (float) prop.getNbMaisons()){
                             proprietesConstructible.add(prop);
                         }
                     }
-                    
+                    // On lui affiche où il peut construire
                     choixTerrainOuConstruire = getMonopoly().getInter().demandeTerrainOuConstruire(proprietesConstructible);
+                    // On construit la maison
                     proprietesConstructible.get(choixTerrainOuConstruire).construireMaison();
+                    // On enleve une maison du monopoly
+                    getMonopoly().enleveMaison();
                 }
+                
+                // On modifie les variables à vérifier pour le prochain début de boucle
+                nbrMaisonsConstruitesTotales = groupe.nbrMaisonsConstruites();
             }
+            // FIN PARTIE MAISON
+            
+            choix = true;
+            // DEBUT PARTIE HOTEL
+            // TANT QUE le a 4 maisons sur chaque propriétés
+            // OU que le nombre total d'hotel construit est compris entre 0 et
+            // le nombre de terrain dans le groupe
+            // ET Que la banque à encore des hotels
+            // ET Que le joueur a assez d'argent
+            // Et qu'il a dis oui pour construire un hotel précédemment
+            while (((nbrMaisonsConstruitesTotales == proprietes.size()*4) 
+                    | (nbrHotelsConstruitsTotals > 0 & nbrHotelsConstruitsTotals < proprietes.size()))
+                    & getMonopoly().getNbHotels() > 0
+                    & this.getCash() > groupe.getPrixAchatHotel()
+                    & choix){
+                
+                // On demande si il veut construire une maison
+                getMonopoly().getInter().afficherArgentJoueur(this);
+                choix = getMonopoly().getInter().proposerConstruction(groupe.getPrixAchatMaison(), "un hotel");
+                
+                // Si il est d'accord
+                if (choix) {
+                    proprietesConstructible.clear();
+                    for (ProprieteAConstruire prop : proprietes){
+                        // On récupère les proprietes qui ont un nombre de maison inférieur à la moyenne
+                        if (prop.getNbHotel() == 0){
+                            proprietesConstructible.add(prop);
+                        }
+                    }
+                    // On lui affiche où il peut construire
+                    choixTerrainOuConstruire = getMonopoly().getInter().demandeTerrainOuConstruire(proprietesConstructible);
+                    // On construit l'hotel
+                    proprietesConstructible.get(choixTerrainOuConstruire).construireHotel();
+                    // On enleve un hotel du monopoly
+                    getMonopoly().enleveHotel();
+                }
+                // On modifie les variables à vérifier pour le prochain début de boucle
+                nbrHotelsConstruitsTotals = groupe.nbrHotelsConstruits();
+            }
+            
+            
             
             
             
