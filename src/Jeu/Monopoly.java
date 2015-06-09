@@ -108,12 +108,23 @@ public class Monopoly {
         public void setNbMaisons(int nbMaisons) {
             this.nbMaisons = nbMaisons;
         }
+        public void enleveMaison(){
+            this.nbMaisons -= 1;
+        }
 
         public int getNbHotels() {
             return nbHotels;
         }
         public void setNbHotels(int nbHotels) {
             this.nbHotels = nbHotels;
+        }
+
+        /**
+         * Enleve un hotel et rajoute 4 maisons au monopoly
+         */
+        public void enleveHotel(){
+            this.nbHotels -= 1;
+            this.nbMaisons += 4;
         }
 
         public ArrayList<Joueur> getJoueurs() {
