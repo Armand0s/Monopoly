@@ -34,6 +34,14 @@ public class ProprieteAConstruire extends CarreauPropriete {
         public void setNbHotel(int nbHotel) {
             this.nbHotel = nbHotel;
         }
+        
+        /**
+         * Rajoute un hotel et supprime 4 maison à la propriété
+         */
+        public void construireHotel(){
+            this.nbHotel += 1;
+            this.nbMaisons -= 4;
+        }
 
         @Override   
         public int getMontantAPayer() {
