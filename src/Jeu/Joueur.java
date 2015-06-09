@@ -247,9 +247,9 @@ public class Joueur {
                             c.setProprietaire(this);
                         }
                     }
-                    
-                // Enfin, si il est lui même propriétaire, il peut construire
-                } else if (proprio == this){
+                // Enfin, si il est lui même propriétaire et qu'il peut construire
+                // Alors on lance la procedure de construction
+                } else if (proprio == this & this.peutConstruire()){
                     //this.construire();
                 }
             }
@@ -259,9 +259,14 @@ public class Joueur {
                     c.tirerCarte();
                 }
                 else if (cTemp instanceof CarreauArgent){
-                    
+                    CarreauArgent c = (CarreauArgent) cTemp;
+                    if (cTemp.getNumero() != 1){
+                        this.removeCash(c.getMontant() * -1);
+                    }
+                } else { //(cTemp instanceof CarreauMouvement)
+                    this.allerPrison();
                 }
-                // Faire la fonction pour déplacer ou payer suivant la carte mais réservé à la semaien bloquée je crois
+                
             }
         }
         
