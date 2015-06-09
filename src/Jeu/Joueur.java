@@ -338,7 +338,7 @@ public class Joueur {
                     proprietesConstructible.clear();
                     for (ProprieteAConstruire prop : proprietes){
                         // On récupère les proprietes qui ont un nombre de maison inférieur à la moyenne
-                        if (((float) nbrMaisonsConstruitesTotales / (float) proprietes.size()) >= (float) prop.getNbMaisons()){
+                        if ((float) prop.getNbMaisons() <= ((float) nbrMaisonsConstruitesTotales / (float) proprietes.size())){
                             proprietesConstructible.add(prop);
                         }
                     }
