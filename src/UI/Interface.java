@@ -3,12 +3,14 @@ package UI;
 import Jeu.CarreauPropriete;
 import Jeu.CarteCaisseEnum;
 import Jeu.CarteChanceEnum;
-import Jeu.Monopoly;
-import java.util.Scanner;
+import Jeu.Compagnie;
+import Jeu.Gare;
 import Jeu.Joueur;
+import Jeu.Monopoly;
 import Jeu.ProprieteAConstruire;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Interface {
 	public Monopoly monopoly;
@@ -161,6 +163,16 @@ public class Interface {
                     + joueur.getPositionCourante().getNumero() + " : "
                     + joueur.getPositionCourante().getNomCarreau());
             System.out.println("   Et il possède " + joueur.getCash() + " euros");
+            System.out.println("   Il possède aussi : ");
+            for (ProprieteAConstruire prop : joueur.getProprietesAConstruire()){
+                System.out.println("   " + prop.getNomCarreau());
+            }
+            for (Compagnie prop : joueur.getCompagnies()){
+                System.out.println("   " + prop.getNomCarreau());
+            }
+            for (Gare prop : joueur.getGares()){
+                System.out.println("   " + prop.getNomCarreau());
+            }
         }
     }
     
