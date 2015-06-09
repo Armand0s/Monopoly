@@ -15,7 +15,7 @@ public class Monopoly {
 	private int nbHotels = 12;
 	private ArrayList<Joueur> joueurs = new ArrayList<>();
 	private Interface inter;
-        private ArrayList<Groupe> groupes = new ArrayList<>();
+        private HashMap<String, Groupe> groupes = new HashMap<>();
         private HashMap<Integer, Carreau> carreaux;
         private int numJoueur;
         private LinkedList<CarteChance> carteChances = new LinkedList<>();
@@ -141,10 +141,10 @@ public class Monopoly {
             this.inter = inter;
         }
 
-        public ArrayList<Groupe> getGroupes() {
+        public HashMap<String, Groupe> getGroupes() {
             return groupes;
         }
-        public void setGroupes(ArrayList<Groupe> groupes) {
+        public void setGroupes(HashMap<String, Groupe> groupes) {
             this.groupes = groupes;
         }
 
@@ -202,7 +202,7 @@ public class Monopoly {
                                     // Recupération des différentes variables
                                         int num = Integer.parseInt(data.get(i)[1]);
                                         String nomC = data.get(i)[2];
-                                        Groupe grp = getGroupe(data.get(i)[3]);
+                                        Groupe grp = groupes.get(data.get(i)[3]);
                                         int prix = Integer.parseInt(data.get(i)[4]);
                                         int nu = Integer.parseInt(data.get(i)[5]);
                                         int mais1 = Integer.parseInt(data.get(i)[6]);
@@ -282,24 +282,17 @@ public class Monopoly {
             Groupe vert      = new Groupe(CouleurPropriete.vert, 200, 200);
             Groupe rouge     = new Groupe(CouleurPropriete.rouge, 150, 150);
 
-            groupes.add(bleuFonce);
-            groupes.add(orange);
-            groupes.add(mauve);
-            groupes.add(violet);
-            groupes.add(bleuCiel);
-            groupes.add(jaune);
-            groupes.add(vert);
-            groupes.add(rouge);
+            groupes.put("bleuFonce", bleuFonce);
+            groupes.put("orange", orange);
+            groupes.put("mauve", mauve);
+            groupes.put("violet", violet);
+            groupes.put("bleuCiel", bleuCiel);
+            groupes.put("jaune", jaune);
+            groupes.put("vert", vert);
+            groupes.put("rouge", rouge);
         }
 
-        private Groupe getGroupe(String couleur){
-            for (Groupe grp : groupes){
-                if (grp.getCouleur().toString() == couleur){
-                  return grp;
-                }
-            }
-            return null;
-        }
+
 
         private void initCarte(){
             Random res = new Random();
@@ -310,6 +303,7 @@ public class Monopoly {
             for (int i = carteCaissesTemp.size()-1; i!=0; i--){
                 carteCaisses.add(carteCaissesTemp.remove(res.nextInt(i)));
             }
+            
             LinkedList<CarteChance> carteChancesTemp = new LinkedList();
             for (CarteChanceEnum carteChance : CarteChanceEnum.values()){
                 carteChancesTemp.add(new CarteChance(this, carteChance));
