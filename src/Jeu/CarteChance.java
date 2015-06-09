@@ -107,6 +107,7 @@ public class CarteChance extends Carte {
         }
         public void avancezDepart(Joueur joueur){
             joueur.avancerCarte(1);
+            joueur.addCash(200);
         }
         public void avancezRuePaix(Joueur joueur){
             joueur.avancerCarte(40);
