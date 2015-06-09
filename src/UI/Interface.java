@@ -43,6 +43,7 @@ public class Interface {
         }
         
         // met un lancé de dé pour chaque joueur pour savoir qui commence
+        System.out.println("---------------------------------------");
         System.out.println("Les joueurs vont jouer dans cet ordre :");
         for(int i=0; i<nbrJoueur; i++){ 
             nbrj[i] = monopoly.lancerDe();
@@ -67,6 +68,11 @@ public class Interface {
         
     }
     
+    public void test(){
+        ProprieteAConstruire c = (ProprieteAConstruire) monopoly.getCarreau(2);
+        System.out.println(c.getGroupePropriete().getCouleur());
+    }
+    
     public void jouer() {
         Joueur joueur = monopoly.getCurrentPlayer();
         this.afficherEtatDebutTour();
@@ -87,23 +93,28 @@ public class Interface {
             sc.nextLine();
             
             monopoly.lancerDesEtAvancer(); // Lance les des et affiche l'etat du joueur
+            // On effectue l'action sur la case
+            joueur.actionCarreau();
+            
+            // SI IL PEUT : On propose d'acheter un titre de propriété
+            // SI IL PEUT : On propose de construire
+            if (joueur.peutConstruire()){
+                joueur.construire();
+            }
+            // SI IL PEUT : On propose de passer au tour suivant
+            
+            // SI IL PEUT : On propose de quitter la partie
   
         }
 
         
         
-        // On effectue l'action sur la case
         
         
         
         
-        // SI IL PEUT : On propose d'acheter un titre de propriété
         
-        // SI IL PEUT : On propose de construire
-        
-        // SI IL PEUT : On propose de passer au tour suivant
-        
-        // SI IL PEUT : On propose de quitter la partie
+
         
         
         // On affiche ensuite l'état courant du jeu et la patrimoine de chaque joueur
@@ -137,6 +148,22 @@ public class Interface {
         }
     }
     
+    public void afficherEtatJoueur(Joueur j){
+        //System.out.println("Vous faites un lancé de " + j.getDernierJetDes());
+        System.out.println("Vous arrivez sur la case : " + j.getPositionCourante().getNomCarreau());
+    }
+    
+    public void afficherEtatDebutTour(){
+        System.out.println("----------------------------------------");
+        for (Joueur joueur : getMonopoly().getJoueurs()){
+            System.out.println("");
+            System.out.println(" - Le joueur " + joueur.getNomJoueur() + " se trouve sur la case "
+                    + joueur.getPositionCourante().getNumero() + " : "
+                    + joueur.getPositionCourante().getNomCarreau());
+            System.out.println("   Et il possède " + joueur.getCash() + " euros");
+        }
+    }
+    
     public void afficherFinDuTour(){
         Joueur joueur = monopoly.getCurrentPlayer();
         System.out.println(joueur.getNomJoueur() + " a fini son tour.");
@@ -154,26 +181,13 @@ public class Interface {
         System.out.println("******************************************");
     }
     
-    public void afficherEtatJoueur(Joueur j){
-        System.out.println("Vous faites un lancé de " + j.getDernierJetDes());
-        System.out.println("Vous arrivez sur la case : " + j.getPositionCourante().getNomCarreau());
-    }
-    
-    public void afficherEtatDebutTour(){
-        for (Joueur joueur : getMonopoly().getJoueurs()){
-            System.out.println(" - Le joueur " + joueur.getNomJoueur() + " se trouve sur la case "
-                    + joueur.getPositionCourante().getNumero() + " : "
-                    + joueur.getPositionCourante().getNomCarreau());
-        }
-    }
-    
     public void afficheMontantAPayer(Joueur proprio, int montant){
         System.out.println("Vous payez " + montant + " au joueur " + proprio.getNomJoueur());
     }
     
     public boolean proposerAchat(CarreauPropriete c){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Voulez vous acheter " + c.getNomCarreau() + " pour la somme de " + c.getPrixAchat() + " ? (oui/non)");
+        System.out.println("Voulez vous acheter " + c.getNomCarreau() + " pour la somme de " + c.getPrixAchat() + " euros ? (oui/non)");
         String choix = sc.nextLine();
         while (!"oui".equals(choix) & !"non".equals(choix)){
             System.out.println("Je n'ai pas compris votre choix");
@@ -197,6 +211,12 @@ public class Interface {
     
     public void afficherArgentJoueur(Joueur j){
         System.out.println("Vous possédez actuellement " + j.getCash());
+    }
+    
+    public void afficheFicheCarte(CarreauPropriete c){
+        System.out.println("+----------------------+");
+        System.out.println("|" + c.getNomCarreau() + "|");
+        System.out.println("+----------------------+");
     }
     
     public int demandeTerrainOuConstruire(ArrayList<ProprieteAConstruire> proprietesConstructible){
